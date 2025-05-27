@@ -7,4 +7,3 @@ namespace Commandos.Entities.Tools
         public string Name => "Chisel";
     }
 }
-
