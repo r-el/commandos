@@ -5,12 +5,22 @@ namespace Commandos.Entities
 {
     public class Commando(string name, string codeName)
     {
-        public string Name { get; private set; } = name;
-        public string CodeName { get; private set; } = codeName;
+        private string Name = name;
+        public string CodeName { get; set; } = codeName;
         public ITool[] Tools { get; private set; } = [new Bag(), new Chisel(), new WaterBottle(), new Rope(), new Hummer()];
         public bool IsWalking { get; set; } = false;
         public bool IsHidden { get; set; } = false;
         public bool IsAttacking { get; set; } = false;
+
+        public string SayName(string commanderRank)
+        {
+            return commanderRank switch
+            {
+                "GENERAL" => Name,
+                "COLONEL" => CodeName,
+                _ => "CLASSIFIED"
+            };
+        }
 
         public void StartWalking()
         {
