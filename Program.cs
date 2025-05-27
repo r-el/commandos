@@ -1,11 +1,39 @@
 ﻿using Commandos.Entities;
 using Commandos.Interfaces;
 
+Console.WriteLine("\n=== Testing Weapon Class ===");
+// יצירת מופעים של נשקים
+Weapon ak47 = new("AK-47", "Kalashnikov", 30);
+Weapon m16 = new("M16", "Colt", 20);
+Weapon glock = new("Glock 17", "Glock", 17);
+
+Console.WriteLine($"Weapon 1: {ak47.Name} by {ak47.Manufacturer}, Bullets: {ak47.Bullets}");
+Console.WriteLine($"Weapon 2: {m16.Name} by {m16.Manufacturer}, Bullets: {m16.Bullets}");
+Console.WriteLine($"Weapon 3: {glock.Name} by {glock.Manufacturer}, Bullets: {glock.Bullets}");
+
+Console.WriteLine("\n=== Testing Shoot Method ===");
+ak47.Shoot();
+ak47.Shoot();
+m16.Shoot();
+glock.Shoot();
+
+Console.WriteLine("\n=== After Shooting ===");
+Console.WriteLine($"{ak47.Name}: {ak47.Bullets} bullets left");
+Console.WriteLine($"{m16.Name}: {m16.Bullets} bullets left");
+Console.WriteLine($"{glock.Name}: {glock.Bullets} bullets left");
+
+Console.WriteLine("\n=== Testing Empty Weapon ===");
+// ירי עד שנגמרים הכדורים
+Weapon smallGun = new("Derringer", "Unknown", 2);
+Console.WriteLine($"Starting with {smallGun.Bullets} bullets");
+smallGun.Shoot();
+smallGun.Shoot();
+smallGun.Shoot(); // Should show "out of bullets"
+
 Console.WriteLine("\n=== Testing Commando ===");
 // יצירת מופע של קומנדו
 Commando commando = new("Yoni", "Kodkod");
 
-// בדיקת שדות הקונסטרקטור
 Console.WriteLine($"Commando Name: {commando.Name}");
 Console.WriteLine($"Commando CodeName: {commando.CodeName}");
 Console.WriteLine($"Number of tools: {commando.Tools.Length}");
