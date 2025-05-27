@@ -30,12 +30,25 @@ smallGun.Shoot();
 smallGun.Shoot();
 smallGun.Shoot(); // Should show "out of bullets"
 
-Console.WriteLine("\n=== Testing Commando ===");
+Console.WriteLine("\n=== Testing Encapsulation ===");
 // יצירת מופע של קומנדו
 Commando commando = new("Yoni", "Kodkod");
 
-Console.WriteLine($"Commando Name: {commando.Name}");
-Console.WriteLine($"Commando CodeName: {commando.CodeName}");
+Console.WriteLine("\n=== Testing Private Name Field Access ===");
+// The Name field is private, so we cannot access it directly from outside the class
+// Console.WriteLine($"Accessing commando.Name property: {commando.Name}"); // This would cause a compilation error
+Console.WriteLine("The Name field is private and cannot be accessed directly from outside the class.");
+
+Console.WriteLine("\n=== Testing SayName Method with Rank-based Access ===");
+Console.WriteLine($"GENERAL access: {commando.SayName("GENERAL")}");
+Console.WriteLine($"COLONEL access: {commando.SayName("COLONEL")}");
+Console.WriteLine($"CAPTAIN access: {commando.SayName("CAPTAIN")}");
+Console.WriteLine($"lowercase general: {commando.SayName("general")}");
+
+Console.WriteLine("\n=== Testing CodeName Property (get/set) ===");
+Console.WriteLine($"Initial CodeName: {commando.CodeName}");
+commando.CodeName = "ShadowFox";
+Console.WriteLine($"Modified CodeName: {commando.CodeName}");
 Console.WriteLine($"Number of tools: {commando.Tools.Length}");
 
 // הדפסת כל הכלים
