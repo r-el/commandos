@@ -1,5 +1,6 @@
 ﻿using Commandos.Entities;
 using Commandos.Interfaces;
+using Commandos.Entities.Commandos;
 
 Console.WriteLine("\n=== Testing Weapon Class ===");
 // יצירת מופעים של נשקים
@@ -78,3 +79,72 @@ commando.Reveal();
 commando.StopAttack();
 
 Console.WriteLine($"After stopping all activities: {commando}");
+
+Console.WriteLine("\n=== Testing Class Recognition ===");
+Console.WriteLine($"Commando class works: {typeof(Commando).Name}");
+
+Console.WriteLine("\n========================================");
+Console.WriteLine("=== INHERITANCE TESTING ===");
+Console.WriteLine("========================================");
+
+Console.WriteLine("\n=== Creating Derived Classes ===");
+AirCommando airCommando = new("Alex", "Falcon");
+SeaCommando seaCommando = new("Marina", "Kraken");
+
+Console.WriteLine($"Air Commando created: {airCommando.CodeName}");
+Console.WriteLine($"Sea Commando created: {seaCommando.CodeName}");
+
+Console.WriteLine("\n=== Testing Inherited Methods ===");
+Console.WriteLine("Air Commando inherited methods:");
+airCommando.StartWalking();
+airCommando.Hide();
+Console.WriteLine($"Air Commando GENERAL access: {airCommando.SayName("GENERAL")}");
+Console.WriteLine($"Air Commando COLONEL access: {airCommando.SayName("COLONEL")}");
+
+Console.WriteLine("\nSea Commando inherited methods:");
+seaCommando.StartWalking();
+seaCommando.StartAttack();
+Console.WriteLine($"Sea Commando GENERAL access: {seaCommando.SayName("GENERAL")}");
+Console.WriteLine($"Sea Commando status: {seaCommando}");
+
+Console.WriteLine("\n=== Testing Unique Methods ===");
+Console.WriteLine("Air Commando unique ability:");
+airCommando.Parachute();
+
+Console.WriteLine("\nSea Commando unique ability:");
+seaCommando.Swim();
+
+Console.WriteLine("\n=== Testing Polymorphism ===");
+Commando[] commandoSquad = [airCommando, seaCommando, new Commando("John", "Ghost")];
+
+Console.WriteLine("Commando squad roll call:");
+for (int i = 0; i < commandoSquad.Length; i++)
+{
+    Console.WriteLine($"Commando {i + 1}: {commandoSquad[i].SayName("GENERAL")} ({commandoSquad[i].CodeName})");
+    Console.WriteLine($"  Type: {commandoSquad[i].GetType().Name}");
+    Console.WriteLine($"  Tools available: {commandoSquad[i].Tools.Length}");
+}
+
+Console.WriteLine("\n=== Testing Type Checking ===");
+foreach (Commando squadMember in commandoSquad)
+{
+    if (squadMember is AirCommando air)
+    {
+        Console.WriteLine($"{air.CodeName} is an Air Commando - executing parachute!");
+        air.Parachute();
+    }
+    else if (squadMember is SeaCommando sea)
+    {
+        Console.WriteLine($"{sea.CodeName} is a Sea Commando - executing swim!");
+        sea.Swim();
+    }
+    else
+    {
+        Console.WriteLine($"{squadMember.CodeName} is a regular Commando - executing standard operations!");
+        squadMember.StartWalking();
+        squadMember.Hide();
+    }
+    Console.WriteLine();
+}
+
+Console.WriteLine("=== Inheritance Testing Complete ===");
