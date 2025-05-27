@@ -8,5 +8,11 @@ namespace Commandos.Entities.Commandos
             Console.WriteLine($"{_name} ({CodeName}) is parachuting from the sky! 🪂");
             Console.WriteLine("The air commando descends with precision and grace...");
         }
+
+        public override void StartAttack()
+        {
+            Console.WriteLine($"חייל קומנדו אוויר {_name} ({CodeName}) תוקף!");
+            IsAttacking = true;
+        }
     }
 }
