@@ -1,3 +1,5 @@
+using Commandos.Interfaces;
+
 namespace Commandos.Entities.Tools
 {
     public record Chisel : ITool
@@ -5,3 +7,4 @@ namespace Commandos.Entities.Tools
         public string Name => "Chisel";
     }
 }
+

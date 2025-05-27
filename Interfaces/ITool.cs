@@ -1,4 +1,7 @@
-public interface ITool
+namespace Commandos.Interfaces
 {
-    string Name { get; }
+    public interface ITool
+    {
+        string Name { get; }
+    }
 }
