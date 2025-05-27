@@ -44,7 +44,7 @@ namespace Commandos.Entities.Commandos
             IsHidden = false;
         }
 
-        public void StartAttack()
+        public virtual void StartAttack()
         {
             Console.WriteLine($"{_name} ({CodeName}) is now attacking.");
             IsAttacking = true;
