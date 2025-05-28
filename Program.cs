@@ -3,6 +3,7 @@ using Commandos.Interfaces;
 using Commandos.Entities.Commandos;
 using Commandos.Entities.Enemies;
 using Commandos.Factories;
+using Commandos.Enums;
 
 Console.WriteLine("\n=== Testing Weapon Class ===");
 // יצירת מופעים של נשקים
@@ -152,6 +153,30 @@ foreach (Commando squadMember in commandoSquad)
 Console.WriteLine("=== Inheritance Testing Complete ===");
 
 // ---------- Testing Enemies ---------- //
-Enemy enemy = EnemyFactory.CreateEnemy("Abu Ali");
-Console.WriteLine(enemy);
-
+EnemyFactory enemyFactory = new();
+Console.WriteLine("\n=== Testing Enemy Creation ===");
+Enemy zombie1 = enemyFactory.CreateEnemy(EnemyType.Zombie, "Zombie1");
+Enemy robot1 = enemyFactory.CreateEnemy(EnemyType.Robot, "Robot1");
+Enemy ghost1 = enemyFactory.CreateEnemy(EnemyType.Ghost, "Ghost1");
+Enemy dragon1 = enemyFactory.CreateEnemy(EnemyType.Dragon, "Dragon1");
+Console.WriteLine($"Created enemies:");
+Console.WriteLine(zombie1);
+Console.WriteLine(robot1);
+Console.WriteLine(ghost1);
+Console.WriteLine(dragon1);
+Console.WriteLine("\n=== Testing Enemy Collection ===");
+IReadOnlyList<Enemy> allEnemies = enemyFactory.GetEnemies();
+Console.WriteLine($"Total enemies created: {allEnemies.Count}");
+foreach (Enemy enemy in allEnemies)
+{
+    Console.WriteLine(enemy);
+}
+Console.WriteLine("\n=== Testing Enemy Removal ===");
+enemyFactory.RemoveEnemy(zombie1.Id);
+Console.WriteLine($"Removed enemy: {zombie1.Name}");
+Console.WriteLine($"Remaining enemies after removal:");
+foreach (Enemy enemy in enemyFactory.GetEnemies())
+{
+    Console.WriteLine(enemy);
+}
+Console.WriteLine("\n=== Testing Enemy Factory Complete ===");
