@@ -1,6 +1,8 @@
 ﻿using Commandos.Entities;
 using Commandos.Interfaces;
 using Commandos.Entities.Commandos;
+using Commandos.Entities.Enemies;
+using Commandos.Factories;
 
 Console.WriteLine("\n=== Testing Weapon Class ===");
 // יצירת מופעים של נשקים
@@ -148,3 +150,8 @@ foreach (Commando squadMember in commandoSquad)
 }
 
 Console.WriteLine("=== Inheritance Testing Complete ===");
+
+// ---------- Testing Enemies ---------- //
+Enemy enemy = EnemyFactory.CreateEnemy("Abu Ali");
+Console.WriteLine(enemy);
+
