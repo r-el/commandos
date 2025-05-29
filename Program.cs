@@ -6,10 +6,10 @@ using Commandos.Factories;
 using Commandos.Enums;
 
 Console.WriteLine("\n=== Testing Weapon Class ===");
-// יצירת מופעים של נשקים
-Weapon ak47 = new("AK-47", "Kalashnikov", 30);
-Weapon m16 = new("M16", "Colt", 20);
-Weapon glock = new("Glock 17", "Glock", 17);
+// Manual weapon creation with WeaponType
+Weapon ak47 = new("AK-47", "Kalashnikov", 30, WeaponType.Rifle);
+Weapon m16 = new("M16", "Colt", 20, WeaponType.Rifle);
+Weapon glock = new("Glock 17", "Glock", 17, WeaponType.Pistol);
 
 Console.WriteLine($"Weapon 1: {ak47.Name} by {ak47.Manufacturer}, Bullets: {ak47.Bullets}");
 Console.WriteLine($"Weapon 2: {m16.Name} by {m16.Manufacturer}, Bullets: {m16.Bullets}");
@@ -27,8 +27,8 @@ Console.WriteLine($"{m16.Name}: {m16.Bullets} bullets left");
 Console.WriteLine($"{glock.Name}: {glock.Bullets} bullets left");
 
 Console.WriteLine("\n=== Testing Empty Weapon ===");
-// ירי עד שנגמרים הכדורים
-Weapon smallGun = new("Derringer", "Unknown", 2);
+// Fire until bullets run out
+Weapon smallGun = new("Derringer", "Unknown", 2, WeaponType.Pistol);
 Console.WriteLine($"Starting with {smallGun.Bullets} bullets");
 smallGun.Shoot();
 smallGun.Shoot();
@@ -180,3 +180,49 @@ foreach (Enemy enemy in enemyFactory.GetEnemies())
     Console.WriteLine(enemy);
 }
 Console.WriteLine("\n=== Testing Enemy Factory Complete ===");
+
+Console.WriteLine("\n=== Testing Weapon Factory ===");
+// יצירת WeaponFactory
+WeaponFactory weaponFactory = new();
+
+// יצירת נשקים שונים
+Console.WriteLine("Creating different weapons...");
+var rifle = weaponFactory.CreateWeapon(WeaponType.Rifle);
+var pistol = weaponFactory.CreateWeapon(WeaponType.Pistol, "Custom Pistol");
+var grenade = weaponFactory.CreateWeapon(WeaponType.Grenade);
+var sniper = weaponFactory.CreateWeapon(WeaponType.Sniper, "Elite Sniper");
+
+Console.WriteLine($"Created {weaponFactory.GetWeaponCount()} weapons:");
+foreach (var weapon in weaponFactory.GetWeapons())
+{
+    Console.WriteLine($"- {weapon}");
+}
+
+Console.WriteLine("\n=== Testing Weapon Usage ===");
+rifle.Shoot();
+pistol.Shoot();
+grenade.Shoot();
+
+Console.WriteLine("\n=== Testing Weapon Removal ===");
+weaponFactory.RemoveWeapon(grenade);
+Console.WriteLine($"Removed grenade. Remaining weapons: {weaponFactory.GetWeaponCount()}");
+foreach (var weapon in weaponFactory.GetWeapons())
+{
+    Console.WriteLine($"- {weapon}");
+}
+
+Console.WriteLine("\n=== Testing GetWeaponsByType ===");
+var rifles = weaponFactory.GetWeaponsByType(WeaponType.Rifle);
+var pistols = weaponFactory.GetWeaponsByType(WeaponType.Pistol);
+Console.WriteLine($"Rifles found: {rifles.Count}");
+foreach (var rifleWeapon in rifles)
+{
+    Console.WriteLine($"- {rifleWeapon.Name} (Type: {rifleWeapon.Type})");
+}
+Console.WriteLine($"Pistols found: {pistols.Count}");
+foreach (var pistolWeapon in pistols)
+{
+    Console.WriteLine($"- {pistolWeapon.Name} (Type: {pistolWeapon.Type})");
+}
+
+Console.WriteLine("\n=== Weapon Factory Testing Complete ===");
